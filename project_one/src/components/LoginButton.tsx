@@ -9,7 +9,7 @@ const LoginButton = () => {
     
     return (
         !isAuthenticated && (
-            <button className="cursor-pointer" onClick={() => loginWithRedirect()}>
+            <button className="cursor-pointer text-center" onClick={() => loginWithRedirect()}>
                 Log In
             </button>
         )
