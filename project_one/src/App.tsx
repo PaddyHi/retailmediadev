@@ -12,7 +12,7 @@ function App() {
       <div className="bg-gray-200 absolute top-0 left-0 w-75 h-full shadow-sm p-10 invisible md:visible">
       
       <img src="/favicon.png" alt="Logo" className="w-12 h-12 mb-4" />
-      <h1 className="text-lg font-bold text-gray-800">Project One</h1> 
+      <h1 className="text-lg font-bold text-gray-800">Project 01</h1> 
       <nav className="mt-6 ">
         
       </nav>
