@@ -58,16 +58,12 @@ function App() {
                   <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-400 border-2 border-white rounded-full"></div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-gray-900 truncate">
+                  <h3 className="font-semibold text-xs text-gray-900 truncate">
                     {user.name || 'User'}
                   </h3>
-                  <p className="text-sm text-gray-600 truncate">
+                  <p className="text-xs text-gray-600 truncate">
                     {user.email || ''}
                   </p>
-                  <div className="flex items-center mt-1">
-                    <div className="w-2 h-2 bg-green-400 rounded-full mr-2"></div>
-                    <span className="text-xs text-gray-500">Online</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -95,7 +91,7 @@ function App() {
                 <LogoutButton />
               </div>
               <div className="text-center pt-1">
-                <p className="text-xs text-gray-400">© 2024 retailmedia.dev</p>
+                <p className="text-xs text-gray-400">2025 © retailmedia.dev</p>
               </div>
             </div>
           ) : (
@@ -104,7 +100,7 @@ function App() {
                 <LoginButton />
               </div>
               <div className="text-center pt-1">
-                <p className="text-xs text-gray-400">© 2024 retailmedia.dev</p>
+                <p className="text-xs text-gray-400"> 2025 © retailmedia.dev</p>
               </div>
             </div>
           )}

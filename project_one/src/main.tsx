@@ -8,9 +8,6 @@ import { Auth0Provider } from '@auth0/auth0-react';
 const domain = import.meta.env.VITE_AUTH0_DOMAIN;
 const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
 
-// Debug logging
-console.log('Auth0 Config:', { domain, clientId });
-
 if (!domain || !clientId) {
   throw new Error('Auth0 domain or client ID is missing. Check your configuration.');
 }
