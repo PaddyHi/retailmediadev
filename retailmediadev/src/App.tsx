@@ -35,7 +35,6 @@ function App() {
 
           {/* Menu Items */}
           <ul className="space-y-8 text-center text-2xl">
-            <li><a href="#home" className="hover:text-gray-500">p01: creative builder</a></li>
             <li><a href="mailto:info@patrickhinlopen.nl" className="hover:text-gray-500">contact me</a></li>
           </ul>
         </div>
