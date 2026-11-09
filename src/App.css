@@ -1,6 +1,23 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  min-height: 100vh;
+  padding: 1.25rem 1rem;
+}
+
+@media (min-width: 640px) {
+  #root {
+    padding: 2.5rem 3rem;
+  }
+}
+
+.screen {
+  max-width: 80ch;
+  text-align: left;
+}
+
+.block + .block {
+  margin-top: 1.25em;
+}
+
+.prompt-line {
+  white-space: pre-wrap;
 }

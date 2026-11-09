@@ -1,48 +1,112 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 @import "tailwindcss";
 
-
 :root {
-  font-family: "Space Mono", monospace;
-  line-height: 1.5;
+  --screen-bg: #000000;
+  --phosphor: #33ff33;
+  --phosphor-dim: #1fae1f;
+  --phosphor-glow: rgba(51, 255, 51, 0.45);
+
+  font-family: "VT323", "Courier New", Courier, monospace;
+  line-height: 1.25;
   font-weight: 400;
 
-  color: #191918;
-  background-color: #fcfbfb;
+  color: var(--phosphor);
+  background-color: var(--screen-bg);
+  color-scheme: dark;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--screen-bg);
+  color: var(--phosphor);
+  font-size: 1.375rem;
+  text-shadow: 0 0 4px var(--phosphor-glow);
 }
 
-.typewriter h1 {
-  overflow: hidden; /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid orange; /* The typewriter cursor */
-  white-space: nowrap; /* Keeps the content on a single line */
-  margin: 0 auto; /* Centers the text */
-  letter-spacing: .15em; /* Adjust as needed */
-  width: 20ch; /* Set this to the number of characters in your text */
-  animation: 
-    typing 3.5s steps(20, end), /* Match the steps to the number of characters */
-    blink-caret .75s step-end infinite;
+@media (min-width: 640px) {
+  body {
+    font-size: 1.625rem;
+  }
 }
 
-/* The typing effect */
-@keyframes typing {
-  from { width: 0 }
-  to { width: 20ch; } /* Match this to the width of your text */
+/* CRT scanlines */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.28) 2px,
+    rgba(0, 0, 0, 0.28) 3px
+  );
 }
 
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: orange; }
+/* Tube vignette */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 11;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+::selection {
+  background: var(--phosphor);
+  color: var(--screen-bg);
+  text-shadow: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+a:hover,
+a:focus-visible {
+  background: var(--phosphor);
+  color: var(--screen-bg);
+  text-decoration: none;
+  text-shadow: none;
+  outline: none;
+}
+
+.dim {
+  color: var(--phosphor-dim);
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.95em;
+  margin-left: 0.05em;
+  vertical-align: -0.1em;
+  background: var(--phosphor);
+  box-shadow: 0 0 6px var(--phosphor-glow);
+  animation: blink 1.06s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
+    animation: none;
+  }
 }
