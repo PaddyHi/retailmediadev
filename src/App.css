@@ -1,23 +1,224 @@
-#root {
+.stage {
   min-height: 100vh;
-  padding: 1.25rem 1rem;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 2rem 1rem;
 }
 
-@media (min-width: 640px) {
-  #root {
-    padding: 2.5rem 3rem;
-  }
+/* ---------- The computer ---------- */
+
+/* All case measurements use cqi (1% of the machine's width) so it scales as one object. */
+.machine {
+  container-type: inline-size;
+  width: min(640px, 100%, max(340px, calc((100svh - 4rem) / 1.24)));
 }
 
-.screen {
-  max-width: 80ch;
+.case {
+  padding: 9cqi 11cqi 0;
+  border-radius: 3.2cqi 3.2cqi 1.6cqi 1.6cqi;
+  background: linear-gradient(
+    to bottom,
+    var(--case-light) 0%,
+    var(--case) 50%,
+    var(--case-dark) 100%
+  );
+  box-shadow:
+    inset 0 0.5cqi 0 rgba(255, 255, 255, 0.8),
+    inset 0.5cqi 0 0 rgba(255, 255, 255, 0.4),
+    inset -0.6cqi 0 0 rgba(0, 0, 0, 0.08),
+    inset 0 -0.6cqi 0 rgba(0, 0, 0, 0.1),
+    0 2cqi 6cqi rgba(0, 0, 0, 0.55);
+}
+
+/* Recessed, sloped frame around the tube */
+.bezel {
+  padding: 4cqi;
+  border-radius: 3cqi;
+  background: linear-gradient(to bottom, #c9bea4 0%, #ddd4bf 45%, #e8e1cf 100%);
+  box-shadow:
+    inset 0 0.9cqi 1.6cqi rgba(0, 0, 0, 0.35),
+    inset 0 -0.4cqi 0.8cqi rgba(255, 255, 255, 0.6),
+    0 0.3cqi 0 rgba(255, 255, 255, 0.7);
+}
+
+/* The CRT glass */
+.crt {
+  position: relative;
+  container-type: inline-size;
+  /* 4:3 tube; grows taller on narrow screens if the text needs it */
+  aspect-ratio: 4 / 3;
+  border-radius: 7% / 9%;
+  background: radial-gradient(ellipse at 50% 45%, #0c180c 0%, #050a05 60%, #000 100%);
+  box-shadow:
+    0 0 0 0.7cqi #2b2720,
+    0 0 0 1cqi rgba(0, 0, 0, 0.25),
+    inset 0 0 3cqi rgba(0, 0, 0, 0.95),
+    inset 0 0 9cqi rgba(0, 0, 0, 0.55);
+}
+
+/* Scanlines */
+.crt::before,
+/* Curved-glass reflection */
+.crt::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.crt::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.3) 2px,
+    rgba(0, 0, 0, 0.3) 3px
+  );
+}
+
+.crt::after {
+  background:
+    radial-gradient(ellipse 70% 45% at 30% 18%, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 70%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 35%),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+.chin {
+  position: relative;
+  height: 32cqi;
+}
+
+/* Embossed maker's badge */
+.badge {
+  position: absolute;
+  left: 1cqi;
+  bottom: 7cqi;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.6cqi;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: #b2a789;
+  text-shadow:
+    0 0.15cqi 0 rgba(255, 255, 255, 0.75),
+    0 -0.1cqi 0 rgba(0, 0, 0, 0.2);
+  user-select: none;
+}
+
+/* Floppy drive slot */
+.floppy {
+  position: absolute;
+  right: 3cqi;
+  top: 10cqi;
+  width: 30cqi;
+  height: 2.6cqi;
+  border-radius: 1.3cqi;
+  background: linear-gradient(to bottom, #15120e, #3b352b);
+  box-shadow:
+    inset 0 0.4cqi 0.6cqi rgba(0, 0, 0, 0.85),
+    0 0.3cqi 0 rgba(255, 255, 255, 0.75),
+    0 -0.2cqi 0 rgba(0, 0, 0, 0.15);
+}
+
+.floppy::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 4cqi;
+  width: 5cqi;
+  height: 1.2cqi;
+  border-radius: 0 0 0.6cqi 0.6cqi;
+  background: #2f2a22;
+  box-shadow: inset 0 0.3cqi 0.4cqi rgba(0, 0, 0, 0.7);
+}
+
+/* Recessed foot under the front of the case */
+.base {
+  height: 4.5cqi;
+  margin: 0 2.5cqi;
+  border-radius: 0 0 1.6cqi 1.6cqi;
+  background: linear-gradient(to bottom, var(--case-deep), #c8bea4);
+  box-shadow:
+    inset 0 0.9cqi 1.1cqi rgba(0, 0, 0, 0.3),
+    0 1.5cqi 4cqi rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- The terminal on the screen ---------- */
+
+.terminal {
+  position: relative;
+  z-index: 1;
+  /* cqi here is 1% of the screen's width, so the text scales with the tube */
+  padding: 5.5cqi 6.5cqi;
+  font-size: clamp(15px, 5.2cqi, 28px);
+  line-height: 1.2;
   text-align: left;
+  color: var(--phosphor);
+  text-shadow: 0 0 4px var(--phosphor-glow);
+  animation: crt-on 0.9s ease-out both;
 }
 
 .block + .block {
-  margin-top: 1.25em;
+  margin-top: 0.9em;
 }
 
 .prompt-line {
   white-space: pre-wrap;
+}
+
+.dim {
+  color: var(--phosphor-dim);
+}
+
+.pending {
+  visibility: hidden;
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.95em;
+  margin-left: 0.05em;
+  vertical-align: -0.1em;
+  background: var(--phosphor);
+  box-shadow: 0 0 6px var(--phosphor-glow);
+  animation: blink 1.06s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Old tube warming up: a bright line that opens into the picture */
+@keyframes crt-on {
+  0% {
+    opacity: 0;
+    transform: scale(1, 0.004);
+    filter: brightness(4);
+  }
+  35% {
+    opacity: 1;
+    transform: scale(1, 0.004);
+    filter: brightness(4);
+  }
+  70% {
+    transform: scale(1, 1);
+    filter: brightness(1.8);
+  }
+  100% {
+    transform: scale(1, 1);
+    filter: brightness(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminal,
+  .cursor {
+    animation: none;
+  }
 }
